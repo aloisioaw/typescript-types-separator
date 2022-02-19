@@ -2,13 +2,27 @@
   "name": "typescript-types-separator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run:dev": "nodemon"
+  "main": "/bin/types-separator",
+  "bin": {
+    "@aloisioaw/typescript-types-separator": "build/index.js",
+    "types-separator": "build/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run:dev": "nodemon",
+    "start": "ts-node src/index.ts",
+    "package": "pkg . --targets node17 --output types-separator"
+  },
+  "pkg": {
+    "scripts": "build/**/*.js"
+  },
+  "exports": "./build/index.js",
   "keywords": [],
-  "author": "",
+  "author": "Aloisio Arsego Wohlmeister <contato@aloisioaw.com>",
   "license": "ISC",
   "devDependencies": {
     "@types/eslint": "^8.4.1",
@@ -17,6 +31,7 @@
     "@types/prettier": "^2.4.4",
     "mocha": "^9.2.0",
     "nodemon": "^2.0.15",
+    "pkg": "^5.5.2",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
   },

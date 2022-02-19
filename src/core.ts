@@ -1,9 +1,10 @@
-import { resolve } from "path";
+import { resolve, sep as SEPARATOR } from "path";
 import { Dirent, readdirSync, readFileSync, writeFileSync } from "fs";
 import { TypescriptFile } from "./TypescriptFile";
 import * as prettier from "prettier";
+import { Config } from "./config";
 
-function getFiles(dir, files: string[]) {
+function getFiles(dir: string, files: string[]) {
   const dirents: Dirent[] = readdirSync(dir, { withFileTypes: true });
   for (const dirent of dirents) {
     const res = resolve(dir, dirent.name);
@@ -26,11 +27,11 @@ function processFile(filePath: string) {
 
   const newFiles: TypescriptFile[] = [];
   const fileNames: string[] = [];
-  let currentFile = { lines: [] } as TypescriptFile;
+  let currentFile = { lines: [] as string[] } as TypescriptFile;
 
   const cycleFile = () => {
     newFiles.push(currentFile);
-    currentFile = { lines: [] } as TypescriptFile;
+    currentFile = { lines: [] as string[] } as TypescriptFile;
   };
 
   const setFilename = (line: string) => {
@@ -93,19 +94,19 @@ function handleImports(files: TypescriptFile[]) {
   }
 }
 
-const files = getFiles(
-  "/home/aloisio/Dev/Workspaces/typescript-types-separator/test/samples/",
-  []
-);
+export function process(config: Config) {
+  const files = getFiles(config.source, []);
 
-files.forEach((file) => {
-  const newFiles = processFile(file);
-  handleImports(newFiles);
+  files.forEach((file) => {
+    const newFiles = processFile(file);
+    handleImports(newFiles);
 
-  newFiles.forEach((file) =>
-    writeFileSync(
-      `./output/${file.fileName}`,
-      prettier.format(file.lines.join(""), { semi: true, parser: "typescript" })
-    )
-  );
-});
+    newFiles.forEach((file) => {
+      const code = prettier.format(file.lines.join(""), {
+        semi: true,
+        parser: "typescript",
+      });
+      writeFileSync(`${config.output}${SEPARATOR}${file.fileName}`, code);
+    });
+  });
+}
