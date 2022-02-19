@@ -1,0 +1,15 @@
+{
+  "exclude": [
+    "packages/**/tests/**",
+    "packages/**/test/**",
+    "packages/**/build/**"
+ ],
+  "references": [
+   {
+      "path": "./packages/cdk"
+   },
+   {
+      "path": "./packages/service"
+   }
+ ]
+ }

@@ -1,0 +1,28 @@
+{
+  "name": "typescript-types-separator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run:dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/eslint": "^8.4.1",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^17.0.18",
+    "@types/prettier": "^2.4.4",
+    "mocha": "^9.2.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "prettier": "^2.5.1"
+  }
+}
