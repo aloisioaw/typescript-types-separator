@@ -1,0 +1,4 @@
+src/
+test/
+nodemon.json
+types-separator.json
