@@ -4,10 +4,9 @@
   "description": "Lib to auxiliate in breaking a single types file into multiple files",
   "author": "Aloisio Arsego Wohlmeister <contato@aloisioaw.com>",
   "version": "1.0.0",
-  "main": "/bin/types-separator",
+  "main": "/bin/typescript-types-separator",
   "bin": {
-    "@aloisioaw/typescript-types-separator": "build/index.js",
-    "types-separator": "build/index.js"
+    "typescript-types-separator": "build/index.js"
   },
   "publishConfig": {
     "access": "public"
